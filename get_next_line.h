@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:29:50 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/09 16:20:35 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/09 21:39:25 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@ typedef struct s_list
 char	*get_next_line(int fd);
 
 int	ft_strlen(char *str);
+char	*ft_join(char *s1, char *s2);
+int	ft_strchr(char *str, int c, int *position);
+
 #endif

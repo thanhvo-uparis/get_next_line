@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:57:05 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/08 22:34:27 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/09 15:26:19 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int main()
 {
 	int fd;
 	size_t num_read;
-	char buf[BUF_SIZE + 1];
+	static char *stash = NULL;
+	char *line;
 
 	fd = open("/mnt/nfs/homes/tvo/Downloads/fd_file/test1.txt", O_RDONLY);
 	if (fd == -1)
@@ -34,7 +35,7 @@ int main()
 	}
 	num_read = read(fd, buf, BUF_SIZE);
 	buf[num_read] = '\0';
-	printf("nombre d'octets: %ld \n", num_read);
+	printf("nombre d'octets: %ld\n", num_read);
 	printf("%s", buf);
 	if (close(fd) == -1)
 	{
