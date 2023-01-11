@@ -6,15 +6,15 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 14:31:45 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/11 15:03:40 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <fcntl.h>
 
 void	ft_bzero(void *ptr, size_t count)
@@ -103,7 +103,7 @@ int		ft_strchr(char *str, char c)
 		if (*str == c)
 			return (1);
 		else
-			*str++;
+			str++;
 	}
 	return (0);
 }
