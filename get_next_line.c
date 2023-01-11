@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:18:25 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 16:34:14 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/11 21:13:21 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char *get_line(char *stash)
 	size = ft_findline(stash);
 	if (size == 0)
 		return (NULL);
-	res = malloc(sizeof(char) * (size + 1));
+	res = ft_calloc(size + 1, sizeof(char));
 	while (stash[i] && i < size)
 	{
 		if (stash[i] == '\n')
@@ -42,9 +42,15 @@ char *extract_line(char *str, int sizetotal)
 	char *res;
 
 	pos = ft_findline(str);
+	// if (pos == 0)
+	// {
+	// 	res = str++;
+	// 	return (res);
+	// }
+	printf("\n----pos is %d----\n", pos);
 	pos++;
 	nb_extract = sizetotal - pos;
-	res = malloc(sizeof(char) * (nb_extract + 1));
+	res = ft_calloc(nb_extract + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -74,9 +80,11 @@ char	*get_next_line(int fd)
 		if (ft_strchr(stash, '\n'))
 			break ;
 	}
+	// free(line);
 	line = get_line(stash);
 	size_stash = ft_strlen(stash);
 	stash = extract_line(stash, size_stash);
+	printf("%s ------\n", stash);
 	return (line);
 }
 
@@ -92,7 +100,8 @@ int main()
 		return (1);
 	}
 	line = get_next_line(fd);
-	printf("%s\n", line);
+	line = get_next_line(fd);
+	printf("%s", line);
 	if (close(fd) == -1)
 	{
 		printf("Close is error!");
