@@ -6,96 +6,131 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:18:25 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/09 21:53:48 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/11 14:04:17 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *get_new_stch(stash, position)
+
+
+char *new_line(char *stash)
 {
-	int len;
 	int size;
-	char *str;
-
-	if(stash == NULL)
-		return (NULL);
-
-	len = ft_strlen(stash);
-	size = len - position;
-	*str = malloc(sizeof(char) * (size + 1))
+	int i;
+	char *res;
 
 	i = 0;
-	while(i < size)
+	size = ft_findline(stash);
+	res = malloc(sizeof(char) * size + 1);
+	while (stash[i] && i < size)
 	{
-		str[i] = stash[position + i];
+		if (stash[i] == '\n')
+			break ;
+		res[i] = stash[i];
 		i++;
 	}
-	str[i] = '\0';
-	return (stash);
+	res[i] = '\0';
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static char		*stash;
-	char			*line;
-	char	*tmp;
 	char buf[BUFFER_SIZE];
-	int byte_read;
-	int position;
+	static char *stash;
+	char *line;
+	char *tmp;
+	int		num_read;
 
-	// byte_read = read(fd, buf, BUFFER_SIZE);
-	// if (byte_read == -1)
-	// {
-	// 	free(buf);
-	// 	return (NULL);
-	// }
-
-
-
-	//
-	while(ft_strchr(stash, '\n', &position) == 0)
+	while (ft_strchr(buf, '\n'))
 	{
-		byte_read = read(fd, buf, BUFFER_SIZE);
-		if(byte_read <= 0)
-				break;
+		num_read = read(fd, buf, BUFFER_SIZE);
+		if (num_read == -1)
+			return (NULL);
 		line = ft_join(stash, buf);
-		if(stash)
+		if (stash)
 			free(stash);
 		stash = line;
+		//buf           stash
+		//hello         hello
+		//Hello_Doll    Hello_Doll
 	}
 
-	printf("%s %d", stash, position);
-
-	// 3 - line = get_line(stash, position); // abcdef\n
-	// 4 - tmp = get_new_stch(stash, position)
-	if(stash)
-		free(stash);
-	stash = tmp;
-
-
-	return (line);
+	tmp = new_line(stash);
+	// stash = new_stash;
+	return (tmp);
 }
 
-// void	read_file(int fd)
+// char *new_stash(char *stash)
 // {
-// 	char *buf[BUFFER_SIZE];
-// 	int byte_read;
+// 	int count = 0;
+// 	int i = 0;
+// 	char *new;
 
-// 	byte_read = read(fd, buf, BUFFER_SIZE);
-// 	if (byte_read == -1)
+// 	while (stash[i])
 // 	{
-// 		free(buf);
-// 		return (NULL);
+// 		if [i] == '\n'
+// 			break;
+// 		i++;
 // 	}
 
+// 	i++;
+// 	while (stash[i])
+// 	{
+// 		count++;
+// 		i++;
+// 	}
+
+// 	new = malloc cout + 1
+
+// 	i--;
+// 	int j = 0;
+// 	while (stash[i])
+// 	{
+// 		new[j] = stash[i];
+// 		count--;
+// 		i--;
+// 	}
+
+// 	return (stash);
 // }
 
+
+// char *get_new_stch(stash, position)
+// {
+// 	int len;
+// 	int size;
+// 	char *str;
+
+// 	if(stash == NULL)
+// 		return (NULL);
+
+// 	len = ft_strlen(stash);
+// 	size = len - position;
+// 	*str = malloc(sizeof(char) * (size + 1))
+
+// 	i = 0;
+// 	while(i < size)
+// 	{
+// 		str[i] = stash[position + i];
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	return (stash);
+// }
+
+// void	get_next_line(int fd)
+// {
+// 	static char		*stash;
+// 	// char			*buf;
+
+// 	stash = get_line(fd);
+// 	printf("%s\n", stash);
+// }
 int main()
 {
 	int fd;
-	size_t num_read;
-	char buf[BUFFER_SIZE];
+	char *line;
 
 	// /mnt/nfs/homes/tvo/Downloads/fd_file/test1.txt
 	fd = open("t1.txt", O_RDONLY);
@@ -104,9 +139,10 @@ int main()
 		printf("ERROR!");
 		return (1);
 	}
-
-	get_next_line(fd);
-
+	line = get_next_line(fd);
+	printf("%s\n", line);
+	// while (line = get_next_line(fd) != NULL)
+	// 	printf("%s", line);
 	if (close(fd) == -1)
 	{
 		printf("Close is error!");

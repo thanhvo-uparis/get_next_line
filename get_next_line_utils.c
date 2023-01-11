@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/09 21:44:29 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/11 14:31:45 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 void	ft_bzero(void *ptr, size_t count)
 {
@@ -52,6 +54,20 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+int	ft_findline(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 char	*ft_join(char *s1, char *s2)
 {
 	char	*str;
@@ -80,21 +96,14 @@ char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
-int	ft_strchr(char *str, int c, int *position)
+int		ft_strchr(char *str, char c)
 {
-	*position = 0;
 	while (str && *str)
 	{
 		if (*str == c)
-		{
-			(*position)++;
 			return (1);
-		}
 		else
-		{
-			str++;
-			(*position)++;
-		}
+			*str++;
 	}
 	return (0);
 }
