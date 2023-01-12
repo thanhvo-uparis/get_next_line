@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 15:03:40 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/12 16:11:54 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	ft_findline(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str && str[i])
+	i = 1;
+	while (str && str[i - 1])
 	{
-		if (str[i] == '\n')
-			break ;
+		if (str[i - 1] == '\n')
+			return (i);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
 char	*ft_join(char *s1, char *s2)

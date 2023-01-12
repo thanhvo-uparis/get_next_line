@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:18:25 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 21:13:21 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/12 17:42:03 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ char *get_line(char *stash)
 
 	i = 0;
 	size = ft_findline(stash);
-	if (size == 0)
-		return (NULL);
+	// if (size == 0)
+	// 	return (NULL);
+	//size--;
 	res = ft_calloc(size + 1, sizeof(char));
 	while (stash[i] && i < size)
 	{
+		res[i] = stash[i];
 		if (stash[i] == '\n')
 			break ;
-		res[i] = stash[i];
 		i++;
 	}
-	res[i] = '\n';
+	res[i + 1] = '\0';
 	return (res);
 }
 
@@ -42,13 +43,6 @@ char *extract_line(char *str, int sizetotal)
 	char *res;
 
 	pos = ft_findline(str);
-	// if (pos == 0)
-	// {
-	// 	res = str++;
-	// 	return (res);
-	// }
-	printf("\n----pos is %d----\n", pos);
-	pos++;
 	nb_extract = sizetotal - pos;
 	res = ft_calloc(nb_extract + 1, sizeof(char));
 	if (!res)
@@ -68,6 +62,16 @@ char	*get_next_line(int fd)
 	int		num_read;
 	int		size_stash;
 
+	int i;
+	i = 0;
+	while (i < BUFFER_SIZE)
+	{
+		buf[i] = 0;
+		i++;
+	}
+	// buf = ft_calloc(BUFFER_SIZE, sizeof(char));
+	// if (!res)
+	// 	return (NULL);
 	while (1)
 	{
 		num_read = read(fd, buf, BUFFER_SIZE);
@@ -79,32 +83,44 @@ char	*get_next_line(int fd)
 		stash = line;
 		if (ft_strchr(stash, '\n'))
 			break ;
+		if (num_read == 0)
+			return (NULL);
 	}
-	// free(line);
 	line = get_line(stash);
 	size_stash = ft_strlen(stash);
 	stash = extract_line(stash, size_stash);
-	printf("%s ------\n", stash);
 	return (line);
 }
 
-int main()
-{
-	int fd;
-	char *line;
+// int main()
+// {
+// 	int fd;
+// 	char *line;
 
-	fd = open("t1.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("ERROR!");
-		return (1);
-	}
-	line = get_next_line(fd);
-	line = get_next_line(fd);
-	printf("%s", line);
-	if (close(fd) == -1)
-	{
-		printf("Close is error!");
-		return (1);
-	}
-}
+// 	fd = open("t1.txt", O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		printf("ERROR!");
+// 		return (1);
+// 	}
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+// 	line = get_next_line(fd);
+// 	printf("%s", line);
+
+// 	if (close(fd) == -1)
+// 	{
+// 		printf("Close is error!");
+// 		return (1);
+// 	}
+// }
