@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/12 16:11:54 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/12 19:46:51 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ char	*ft_join(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	if (!s1 && !s2)
+		return (NULL);
 	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	if (sizetotal == 0)
+		return (NULL);
 	str = malloc(sizeof(char) * (sizetotal + 1));
 	if (!str)
 		return (NULL);
