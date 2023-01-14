@@ -6,21 +6,11 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:18:25 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/13 14:51:38 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/14 17:06:29 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char *ft_free(char *stash, char *buf)
-{
-	char	*tmp;
-
-	tmp = ft_join(stash, buf);
-	if (stash)
-		free(stash);
-	return (tmp);
-}
 
 char *get_line(char *stash)
 {
@@ -28,10 +18,11 @@ char *get_line(char *stash)
 	int i;
 	char *res;
 
-	if(ft_strlen(stash) == 0)
-		return (NULL);
 	i = 0;
 	size = ft_findline(stash);
+	// if (size == 0)
+	// 	return (NULL);
+	//size--;
 	res = ft_calloc(size + 1, sizeof(char));
 	while (stash[i] && i < size)
 	{
@@ -51,10 +42,8 @@ char *extract_line(char *str, int sizetotal)
 	int pos;
 	char *res;
 
-	if(sizetotal == 0)
-		return (NULL);
 	pos = ft_findline(str);
-	nb_extract = sizetotal - (pos - 1);
+	nb_extract = sizetotal - pos;
 	res = ft_calloc(nb_extract + 1, sizeof(char));
 	if (!res)
 		return (NULL);
@@ -62,33 +51,32 @@ char *extract_line(char *str, int sizetotal)
 	while (str && str[pos] != '\0')
 		res[i++] = str[pos++];
 	res[nb_extract] = '\0';
-	free(str);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*buf;
+	char	buf[BUFFER_SIZE];
 	static char	*stash;
 	char	*line;
 	int		num_read;
 	int		size_stash;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))
-		return (NULL);
-	buf = ft_calloc(BUFFER_SIZE, sizeof(char));
-	if (!buf)
-		return (NULL);
+	int i;
+	i = 0;
+	while (i < BUFFER_SIZE)
+	{
+		buf[i] = 0;
+		i++;
+	}
+	// buf = ft_calloc(BUFFER_SIZE, sizeof(char));
+	// if (!res)
+	// 	return (NULL);
 	while (1)
 	{
 		num_read = read(fd, buf, BUFFER_SIZE);
 		if (num_read == -1)
 			return (NULL);
-		if (num_read == 0 && stash == NULL)
-		{
-			free(buf);
-			return (NULL);
-		}
 		line = ft_join(stash, buf);
 		if (stash)
 			free(stash);
@@ -96,13 +84,8 @@ char	*get_next_line(int fd)
 		if (ft_strchr(stash, '\n'))
 			break ;
 		if (num_read == 0)
-		{
-			free(buf);
 			return (NULL);
-		}
 	}
-	free(buf);
-	free(line);
 	line = get_line(stash);
 	size_stash = ft_strlen(stash);
 	stash = extract_line(stash, size_stash);
@@ -114,34 +97,26 @@ char	*get_next_line(int fd)
 // 	int fd;
 // 	char *line;
 
-// 	fd = open("newline.txt", O_RDONLY);
+// 	fd = open("t1.txt", O_RDONLY);
 // 	if (fd == -1)
 // 	{
 // 		printf("ERROR!");
 // 		return (1);
 // 	}
-
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
-// 	free(line);
 
 // 	if (close(fd) == -1)
 // 	{

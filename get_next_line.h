@@ -6,15 +6,15 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:29:50 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 16:34:59 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/14 17:00:25 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 #define GET_NEXT_LINE_H
-
+#ifndef BUFFER_SIZE
 #define BUFFER_SIZE 5
-
+#endif
 #include	<unistd.h>
 #include	<stdio.h>
 #include	<stdlib.h>

@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/12 19:46:51 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/14 16:59:13 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,7 @@ char	*ft_join(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	if (!s1 && !s2)
-		return (NULL);
 	sizetotal = ft_strlen(s1) + ft_strlen(s2);
-	if (sizetotal == 0)
-		return (NULL);
 	str = malloc(sizeof(char) * (sizetotal + 1));
 	if (!str)
 		return (NULL);
@@ -111,18 +107,3 @@ int		ft_strchr(char *str, char c)
 	}
 	return (0);
 }
-
-// int main()
-// {
-// 	char str1[] = "hello word!";
-// 	char *ptr;
-
-// 	ptr = ft_strchr(str1, 'l');
-// 	printf("%s", ptr);
-// 	if (ptr)
-// 	{
-// 		printf("\nl se trouve a l'index %ld", ptr - str1);
-// 	}
-// 	else
-// 		printf("\nl se ne trouve pas dans str1!");
-// }
