@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/11 15:03:40 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/16 14:50:15 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,6 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_findline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '\n')
-			break ;
-		i++;
-	}
-	return (i);
-}
-
 char	*ft_join(char *s1, char *s2)
 {
 	char	*str;
@@ -96,7 +82,7 @@ char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
-int		ft_strchr(char *str, char c)
+int	ft_strchr(char *str, char c)
 {
 	while (str && *str)
 	{
@@ -107,18 +93,3 @@ int		ft_strchr(char *str, char c)
 	}
 	return (0);
 }
-
-// int main()
-// {
-// 	char str1[] = "hello word!";
-// 	char *ptr;
-
-// 	ptr = ft_strchr(str1, 'l');
-// 	printf("%s", ptr);
-// 	if (ptr)
-// 	{
-// 		printf("\nl se trouve a l'index %ld", ptr - str1);
-// 	}
-// 	else
-// 		printf("\nl se ne trouve pas dans str1!");
-// }

@@ -6,7 +6,7 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:18:54 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/14 16:59:13 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/16 14:50:15 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,6 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_findline(char *str)
-{
-	int	i;
-
-	i = 1;
-	while (str && str[i - 1])
-	{
-		if (str[i - 1] == '\n')
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
 char	*ft_join(char *s1, char *s2)
 {
 	char	*str;
@@ -96,7 +82,7 @@ char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
-int		ft_strchr(char *str, char c)
+int	ft_strchr(char *str, char c)
 {
 	while (str && *str)
 	{
