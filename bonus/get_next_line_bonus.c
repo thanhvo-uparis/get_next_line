@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:18:25 by tvo               #+#    #+#             */
-/*   Updated: 2023/01/16 14:50:29 by tvo              ###   ########.fr       */
+/*   Updated: 2023/01/16 16:01:29 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_free(char *stack, char *buf)
 {
@@ -81,6 +81,7 @@ char	*read_file(int fd, char *stack)
 			free(buf);
 			return (NULL);
 		}
+		
 		buf[num_read] = '\0';
 		stack = ft_free(stack, buf);
 		if (ft_strchr(stack, '\n'))
@@ -92,7 +93,7 @@ char	*read_file(int fd, char *stack)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char *stashs[100];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -105,43 +106,43 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int main()
-// {
-// 	int fd;
-// 	char *line;
+int main()
+{
+	int fd;
+	char *line;
 
-// 	fd = open("2-otarie.txt", O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		printf("ERROR!");
-// 		return (1);
-// 	}
+	fd = open("t1.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("ERROR!");
+		return (1);
+	}
 
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
-// 	line = get_next_line(fd);
-// 	printf("%s", line);
-// 	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
 
-// 	if (close(fd) == -1)
-// 	{
-// 		printf("Close is error!");
-// 		return (1);
-// 	}
-// }
+	if (close(fd) == -1)
+	{
+		printf("Close is error!");
+		return (1);
+	}
+}
